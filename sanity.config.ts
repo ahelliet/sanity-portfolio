@@ -10,6 +10,7 @@ import { defineConfig } from 'sanity'
 import { presentationTool } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import {media} from 'sanity-plugin-media'
 import {muxInput} from 'sanity-plugin-mux-input'
 
 import { apiVersion, dataset, projectId, studioUrl } from '@/sanity/lib/api'
@@ -55,7 +56,7 @@ export default defineConfig({
   plugins: [
     frFRLocale(),
     structureTool({
-      structure: pageStructure([home, settings]),
+      structure: pageStructure([home, blog, settings]),
     }),
     presentationTool({
       locate,
@@ -66,9 +67,10 @@ export default defineConfig({
       },
     }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
-    singletonPlugin([home.name, settings.name]),
+    singletonPlugin([home.name, settings.name, blog.name]),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
+    media(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
