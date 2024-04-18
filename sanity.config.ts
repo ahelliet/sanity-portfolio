@@ -3,6 +3,7 @@
  * This config is used to set up Sanity Studio that's mounted on the `app/studio/[[...index]]/Studio.tsx` route
  */
 
+import { frFRLocale } from '@sanity/locale-fr-fr'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { presentationTool } from 'sanity/presentation'
@@ -23,8 +24,8 @@ import home from '@/sanity/schemas/singletons/home'
 import settings from '@/sanity/schemas/singletons/settings'
 
 const title =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE ||
-  'Next.js Personal Website with Sanity.io'
+  'BreizhWeb.Dev' ||
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE
 
 export default defineConfig({
   basePath: studioUrl,
@@ -50,6 +51,7 @@ export default defineConfig({
     ],
   },
   plugins: [
+    frFRLocale(),
     structureTool({
       structure: pageStructure([home, settings]),
     }),

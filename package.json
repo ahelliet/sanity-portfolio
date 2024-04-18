@@ -14,6 +14,7 @@
     "@sanity/demo": "^2.0.0",
     "@sanity/icons": "^2.11.8",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/locale-fr-fr": "^1.2.5",
     "@sanity/preview-url-secret": "^1.6.9",
     "@sanity/react-loader": "^1.9.12",
     "@sanity/ui": "^2.1.4",
