@@ -28,8 +28,12 @@ export function resolveHref(
   switch (documentType) {
     case 'home':
       return '/'
+    case 'blog':
+      return '/blog'
     case 'page':
       return slug ? `/${slug}` : undefined
+    case 'blogPost':
+      return slug ? `/blog/${slug}` : undefined
     case 'project':
       return slug ? `/projects/${slug}` : undefined
     default:

@@ -36,6 +36,12 @@ export interface HomePagePayload {
   title?: string
 }
 
+export interface BlogPagePayload {
+  footer?: PortableTextBlock[]
+  overview?: PortableTextBlock[]
+  title?: string
+}
+
 export interface PagePayload {
   body?: PortableTextBlock[]
   name?: string
@@ -56,6 +62,13 @@ export interface ProjectPayload {
   site?: string
   slug: string
   tags?: string[]
+  title?: string
+}
+
+export interface BlogPostPayload {
+  coverImage?: Image
+  description?: PortableTextBlock[]
+  overview?: PortableTextBlock[]
   title?: string
 }
 

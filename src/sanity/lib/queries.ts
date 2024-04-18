@@ -16,6 +16,14 @@ export const homePageQuery = groq`
   }
 `
 
+export const blogPageQuery = groq`
+  *[_type == "blog"][0]{
+    _id,
+    overview,
+    title,
+  }
+`
+
 export const pagesBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
     _id,
@@ -37,6 +45,16 @@ export const projectBySlugQuery = groq`
     site,
     "slug": slug.current,
     tags,
+    title,
+  }
+`
+export const blogPostBySlugQuery = groq`
+  *[_type == "blogPost" && slug.current == $slug][0] {
+    _id,
+    coverImage,
+    description,
+    overview,
+    "slug": slug.current,
     title,
   }
 `

@@ -17,6 +17,8 @@ export const locate: DocumentLocationResolver = (params, context) => {
   if (
     params.type === 'home' ||
     params.type === 'page' ||
+    params.type === 'blog' ||
+    params.type === 'blogPost' ||
     params.type === 'project'
   ) {
     const doc$ = context.documentStore.listenQuery(
@@ -25,10 +27,10 @@ export const locate: DocumentLocationResolver = (params, context) => {
       { perspective: 'previewDrafts' },
     ) as Observable<
       | {
-          _type: string
-          slug: { current: string }
-          title: string | null
-        }[]
+        _type: string
+        slug: { current: string }
+        title: string | null
+      }[]
       | null
     >
     return doc$.pipe(
@@ -40,22 +42,56 @@ export const locate: DocumentLocationResolver = (params, context) => {
           case 'home':
             return isReferencedBySettings
               ? ({
-                  locations: [
-                    {
-                      title:
-                        docs?.find((doc) => doc._type === 'home')?.title ||
-                        'Home',
-                      href: resolveHref(params.type)!,
-                    },
-                  ],
-                  tone: 'positive',
-                  message: 'This document is used to render the front page',
-                } satisfies DocumentLocationsState)
+                locations: [
+                  {
+                    title:
+                      docs?.find((doc) => doc._type === 'home')?.title ||
+                      'Home',
+                    href: resolveHref(params.type)!,
+                  },
+                ],
+                tone: 'positive',
+                message: 'This document is used to render the front page',
+              } satisfies DocumentLocationsState)
               : ({
-                  tone: 'critical',
-                  message: `The top menu isn't linking to the home page. This might make it difficult for visitors to navigate your site.`,
-                } satisfies DocumentLocationsState)
+                tone: 'critical',
+                message: `The top menu isn't linking to the home page. This might make it difficult for visitors to navigate your site.`,
+              } satisfies DocumentLocationsState)
           case 'page':
+            return {
+              locations: docs
+                ?.map((doc) => {
+                  const href = resolveHref(doc._type, doc?.slug?.current)
+                  return {
+                    title: doc?.title || 'Untitled',
+                    href: href!,
+                  }
+                })
+                .filter((doc) => doc.href !== undefined),
+              tone: isReferencedBySettings ? 'positive' : 'critical',
+              message: isReferencedBySettings
+                ? 'The top menu is linking to this page'
+                : "The top menu isn't linking to this page. It can still be accessed if the visitor knows the URL.",
+            } satisfies DocumentLocationsState
+          case 'blog':
+            return isReferencedBySettings
+              ? ({
+                locations: [
+                  {
+                    title:
+                      docs?.find((doc) => doc._type === 'blog')?.title ||
+                      'Blog',
+                    href: resolveHref(params.type)!,
+                  },
+                ],
+                tone: 'positive',
+                message: 'This document is used to render the blog page',
+              } satisfies DocumentLocationsState)
+              : ({
+                tone: 'critical',
+                message: `The top menu isn't linking to the blog page. This might make it difficult for visitors to navigate your site.`,
+              } satisfies DocumentLocationsState)
+          case 'blogPost':
             return {
               locations: docs
                 ?.map((doc) => {
