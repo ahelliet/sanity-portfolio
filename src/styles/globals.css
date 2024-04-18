@@ -74,3 +74,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Your base theme settings */
+/* @layer base {
+  html {
+    --color-primary: #4285f4;
+    --color-secondary: #34a853;
+    --color-buttons: #fbbc05;
+    --color-typography: #ea4335;
+  }
+
+  html[data-theme="theme1"] {
+    --color-primary: #f98866;
+    --color-secondary: #80bd9e;
+    --color-buttons: #89da59;
+    --color-typography: #ff320e;
+  }
+
+  html[data-theme="theme2"] {
+    --color-primary: #f4cc70;
+    --color-secondary: #6ab187;
+    --color-buttons: #de7a22;
+    --color-typography: #20948b;
+  }
+} */
