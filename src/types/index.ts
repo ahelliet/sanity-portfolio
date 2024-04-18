@@ -69,6 +69,7 @@ export interface BlogPostPayload {
   coverImage?: Image
   description?: PortableTextBlock[]
   overview?: PortableTextBlock[]
+  body?: PortableTextBlock[]
   title?: string
 }
 

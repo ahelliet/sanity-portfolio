@@ -125,43 +125,31 @@ export default defineType({
             }),
           ],
         }),
-        // defineField({
-        //   type: 'code',
-        //   name: 'codeBloc',
-        //   title: 'Bloc de code',
-        //   options: {
-        //     withFilename: true,
-        //   },
-        // }),
+        defineField({
+          type: 'code',
+          name: 'codeBloc',
+          title: 'Bloc de code',
+          options: {
+            withFilename: true,
+          },
+        }),
         defineField({
           type: 'object',
-          name: 'summary',
-          title: 'Sommaire',
+          name: 'video',
+          title: 'Video',
           fields: [
             defineField({
-              type: 'boolean',
-              name: 'isAuto',
-              title: 'Génération automatique ?',
+              type: 'mux.video',
+              name: 'src',
+              title: 'Src',
+            }),
+            defineField({
+              type: 'string',
+              name: 'caption',
+              title: 'Caption',
             }),
           ],
         }),
-        // defineField({
-        //   type: 'object',
-        //   name: 'video',
-        //   title: 'Video',
-        //   fields: [
-        //     defineField({
-        //       type: 'mux.video',
-        //       name: 'src',
-        //       title: 'Src',
-        //     }),
-        //     defineField({
-        //       type: 'string',
-        //       name: 'caption',
-        //       title: 'Caption',
-        //     }),
-        //   ],
-        // }),
       ],
     }),
   ],

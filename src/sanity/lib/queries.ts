@@ -51,11 +51,16 @@ export const projectBySlugQuery = groq`
 export const blogPostBySlugQuery = groq`
   *[_type == "blogPost" && slug.current == $slug][0] {
     _id,
-    coverImage,
-    description,
+    body[] {
+      _type == "video" => {
+      "playbackId": src.asset->playbackId,
+      },
+      ...
+    },
     overview,
-    "slug": slug.current,
     title,
+    "slug": slug.current,
+    ...
   }
 `
 
