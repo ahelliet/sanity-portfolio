@@ -3,8 +3,10 @@
  * This config is used to set up Sanity Studio that's mounted on the `app/studio/[[...index]]/Studio.tsx` route
  */
 
+import { assist } from '@sanity/assist'
 import { codeInput } from '@sanity/code-input'
 import { frFRLocale } from '@sanity/locale-fr-fr'
+import {scheduledPublishing} from '@sanity/scheduled-publishing'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { presentationTool } from 'sanity/presentation'
@@ -35,6 +37,11 @@ export default defineConfig({
   projectId: projectId || '',
   dataset: dataset || '',
   title,
+  document: {
+    unstable_comments: {
+      enabled: true
+    },
+  },
   schema: {
     // If you want more content types, you can add them to this array
     types: [
@@ -71,10 +78,12 @@ export default defineConfig({
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
     media(),
+    scheduledPublishing(),
+    muxInput(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
     codeInput(),
-    muxInput()
+    assist(),
   ],
 })
