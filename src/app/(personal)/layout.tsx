@@ -2,6 +2,7 @@ import "../../styles/globals.css";
 
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google"
+import PlausibleProvider from 'next-plausible'
 import { ThemeProvider } from 'next-themes'
 
 import { cn } from "@/lib/utils"
@@ -23,12 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <head>
+        <PlausibleProvider domain="breizhweb.dev" enabled selfHosted={true} trackFileDownloads={true} trackLocalhost={true} trackOutboundLinks={true} />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}>
-        <ThemeProvider attribute='data-theme' enableColorScheme={true} >{children}</ThemeProvider>
+        <ThemeProvider defaultTheme="system" attribute='data-theme' enableColorScheme={true} enableSystem disableTransitionOnChange>{children}</ThemeProvider>
       </body>
     </html >
   );
